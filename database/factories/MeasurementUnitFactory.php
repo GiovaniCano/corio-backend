@@ -17,7 +17,10 @@ class MeasurementUnitFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => fake()->unique()->text(20),
+            'abbreviation' => fake()->unique()->randomLetter() . fake()->unique()->randomLetter(),
+            'measurement_type_id' => rand(1,3),
+            'convertion' => rand(100,500),
         ];
     }
 }

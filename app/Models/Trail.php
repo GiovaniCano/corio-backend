@@ -9,6 +9,8 @@ class Trail extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+    
     protected $fillable = [
         'itemable_id',
         'trail',

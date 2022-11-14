@@ -17,7 +17,8 @@ class ItemFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => fake()->unique()->text(20),
+            'measurement_type_id' => rand(1,3)
         ];
     }
 }

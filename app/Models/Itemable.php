@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Relations\MorphPivot;
 
 class Itemable extends MorphPivot
 {
+    public $table = 'itemables';
+    
     public $incrementing = true;
 
     protected $fillables = [
@@ -15,6 +17,6 @@ class Itemable extends MorphPivot
     ];
 
     public function trail() {
-        return $this->hasOne(Trail::class);
+        return $this->hasOne(Trail::class, 'itemable_id', 'id');
     }
 }

@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('trails', function (Blueprint $table) {
             $table->foreignId('itemable_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
             $table->primary('itemable_id');
-            $table->string('trail', 1030);
+            $table->string('trail'); // day / section / dish
         });
     }
 

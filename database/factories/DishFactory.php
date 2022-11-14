@@ -17,7 +17,7 @@ class DishFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => fake()->unique()->text(20),
         ];
     }
 }

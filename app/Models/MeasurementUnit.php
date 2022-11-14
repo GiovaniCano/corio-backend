@@ -16,4 +16,12 @@ class MeasurementUnit extends Model
         'convertion',
         'user_id',
     ];
+
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
+    
+    public function measurementType() {
+        return $this->belongsTo(User::class);
+    }
 }

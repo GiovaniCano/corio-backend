@@ -13,4 +13,8 @@ class Itemable extends MorphPivot
         'quantity',
         'measurement_unit_id',
     ];
+
+    public function trail() {
+        return $this->hasOne(Trail::class);
+    }
 }

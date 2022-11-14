@@ -14,4 +14,12 @@ class Item extends Model
         'user_id',
         'measurement_type_id',
     ];
+
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
+    
+    public function measurementType() {
+        return $this->belongsTo(User::class);
+    }
 }

@@ -2,13 +2,13 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -42,4 +42,28 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function avatar() {
+        return $this->belongsTo(Avatar::class);
+    }
+
+    public function days() {
+        return $this->hasMany(Day::class);
+    }
+
+    public function dishes() {
+        return $this->hasMany(Dish::class);
+    }
+
+    public function lists() {
+        return $this->hasMany(Listt::class);
+    }
+    
+    public function items() {
+        return $this->hasMany(Item::class);
+    }
+
+    public function measurementUnits() {
+        return $this->hasMany(MeasurementUnit::class);
+    }
 }

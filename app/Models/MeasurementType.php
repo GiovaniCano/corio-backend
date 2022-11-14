@@ -6,7 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class MeasurementType extends Model
 {
-    protected $fillable = [
-        'name'
-    ];
+    
 }

@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('_test', function() {
-    return response()->json('hola');
+Route::get('auth-status', function(Request $request) {
+    return auth()->check() ? response()->json($request->user()->load('avatar')) : null;
 });
+
+// Route::get('_test', function() {
+//     return response()->json('hola');
+// });
+
+Route::fallback(fn() => response()->json('Not Found', 404));

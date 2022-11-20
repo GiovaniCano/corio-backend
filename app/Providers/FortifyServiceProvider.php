@@ -14,10 +14,12 @@ use Laravel\Fortify\Fortify;
 
 use Laravel\Fortify\Features;
 use App\Actions\Fortify\AttemptToAuthenticate;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Fortify\Actions\EnsureLoginIsNotThrottled;
 use Laravel\Fortify\Actions\PrepareAuthenticatedSession;
 use Laravel\Fortify\Actions\RedirectIfTwoFactorAuthenticatable;
 use Laravel\Fortify\Contracts\LoginResponse;
+use Laravel\Fortify\Contracts\RegisterResponse;
 
 class FortifyServiceProvider extends ServiceProvider
 {
@@ -30,8 +32,15 @@ class FortifyServiceProvider extends ServiceProvider
     {
         $this->app->instance(LoginResponse::class, new class implements LoginResponse {
             public function toResponse($request) {
-                return response()->json($request->user()->load('avatar'));
+                return response()->json($request->user());
                 // 'two_factor' => false
+            }
+        });
+        $this->app->instance(RegisterResponse::class, new class implements RegisterResponse {
+            public function toResponse($request)
+            {
+                Auth::logout();
+                return response()->json(null, 201);
             }
         });
     }

@@ -15,7 +15,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('auth-status', function(Request $request) {
-    return auth()->check() ? response()->json($request->user()->load('avatar')) : null;
+    return auth()->check() 
+            ? response()->json($request->user()) 
+            : response()->json(null, 204);
 });
 
 // Route::get('_test', function() {

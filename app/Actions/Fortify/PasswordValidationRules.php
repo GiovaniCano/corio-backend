@@ -18,6 +18,7 @@ trait PasswordValidationRules
             'string', 
             (new Password)->requireNumeric()->requireSpecialCharacter()->requireUppercase(), 
             'confirmed',
+            'max:255'
         ];
     }
 }

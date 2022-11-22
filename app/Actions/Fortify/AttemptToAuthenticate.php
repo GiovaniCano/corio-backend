@@ -1,5 +1,7 @@
 <?php
 
+/* Used in FortifyServiceProvider > boot > Fortify::authenticateThrough */
+
 namespace App\Actions\Fortify;
 
 use Illuminate\Validation\ValidationException;
@@ -20,7 +22,11 @@ class AttemptToAuthenticate extends FortifyAttemptToAuthenticate
         $this->limiter->increment($request);
 
         throw ValidationException::withMessages([
-            'auth' => [trans('auth.failed')],
+            'auth' => [trans('auth.failed')], 
+                // to show the "credentials not match our records" 
+                // on the form instead of just on email (because maybe 
+                // the email didn't failed but the password, and that 
+                // could be confusing for the user)
         ]);
     }
 }

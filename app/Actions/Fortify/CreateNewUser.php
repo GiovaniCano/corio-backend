@@ -3,6 +3,7 @@
 namespace App\Actions\Fortify;
 
 use App\Models\User;
+use App\Rules\AlphaNumExtras;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
@@ -26,7 +27,9 @@ class CreateNewUser implements CreatesNewUsers
                 'string', 
                 Rule::unique(User::class),
                 'min:2', 
-                'max:255', 
+                'max:25', 
+                new AlphaNumExtras
+                // "regex:/^[a-z0-9ÁÉÍÓÚáéíóúÑñÜü.'_-]+$/i"
             ],
             'email' => [
                 'required',

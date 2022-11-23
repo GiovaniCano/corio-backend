@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::delete('user/delete-account', [UserController::class, 'destroy'])->name('user.destroy')->middleware(['auth:web', 'password.confirm']);
 Route::put('user/profile-information', [UserController::class, 'update'])->name('user-profile-information.update')->middleware('auth:web');
 
 Route::get('avatars', [UserController::class, 'avatars'])->name('avatars')->middleware('auth:web');

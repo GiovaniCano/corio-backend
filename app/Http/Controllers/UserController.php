@@ -8,6 +8,11 @@ use Laravel\Fortify\Contracts\UpdatesUserProfileInformation;
 
 class UserController extends Controller
 {
+    function destroy(Request $request) {
+        $request->user()->delete(); // everything is cascade on delete
+        return response()->json(null, 204);
+    }
+
     function avatars() {
         return Avatar::all();
     }

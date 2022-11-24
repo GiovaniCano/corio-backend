@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,6 +19,7 @@ class DaySectionFactory extends Factory
     {
         return [
             'name' => fake()->text(20),
+            'user_id' => User::query()->latest()->first()
         ];
     }
 }

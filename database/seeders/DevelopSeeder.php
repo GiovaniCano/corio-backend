@@ -45,7 +45,6 @@ class DevelopSeeder extends Seeder
                     'quantity' => fake()->randomFloat(2,1,600),
                     'measurement_unit_id' => rand(1,5),
                 ]);
-                // trail
             }
 
             foreach($user->days as $day) {

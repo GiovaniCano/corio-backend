@@ -52,6 +52,9 @@ class User extends Authenticatable
     public function days() {
         return $this->hasMany(Day::class);
     }
+    public function daySections() {
+        return $this->hasMany(DaySection::class);
+    }
 
     public function dishes() {
         return $this->hasMany(Dish::class);

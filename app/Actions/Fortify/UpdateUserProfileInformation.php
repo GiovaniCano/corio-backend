@@ -2,6 +2,8 @@
 
 namespace App\Actions\Fortify;
 
+use App\Models\User;
+use App\Rules\AlphaNumExtras;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
@@ -19,16 +21,23 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
     public function update($user, array $input)
     {
         Validator::make($input, [
-            'username' => ['required', 'string', 'max:255'],
-
+            'username' => [
+                'required', 
+                'string', 
+                Rule::unique(User::class)->ignore($user->id),
+                'min:2', 
+                'max:25', 
+                new AlphaNumExtras
+                // "regex:/^[a-z0-9ÁÉÍÓÚáéíóúÑñÜü.'_-]+$/i"
+            ],
             'email' => [
                 'required',
                 'string',
                 'email',
+                Rule::unique(User::class)->ignore($user->id),
                 'max:255',
-                Rule::unique('users')->ignore($user->id),
             ],
-            // avatar_id
+            'avatar_id' => 'required|integer|exists:avatars,id'
         ])->validateWithBag('updateProfileInformation');
 
         if ($input['email'] !== $user->email &&
@@ -38,6 +47,7 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
             $user->forceFill([
                 'username' => $input['username'],
                 'email' => $input['email'],
+                'avatar_id' => $input['avatar_id'],
             ])->save();
         }
     }
@@ -54,6 +64,7 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
         $user->forceFill([
             'username' => $input['username'],
             'email' => $input['email'],
+            'avatar_id' => $input['avatar_id'],
             'email_verified_at' => null,
         ])->save();
 

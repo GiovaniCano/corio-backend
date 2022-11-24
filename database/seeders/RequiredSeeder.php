@@ -74,36 +74,36 @@ class RequiredSeeder extends Seeder
             Avatar::create(['name' => $avatar]);
         }
 
-        MeasurementType::create(['name' => 'unit']); // 1
-        MeasurementType::create(['name' => 'weight']); // 2
-        MeasurementType::create(['name' => 'volume']); // 3
+        MeasurementType::create(['name' => 'Unidad']); // 1
+        MeasurementType::create(['name' => 'Peso']); // 2
+        MeasurementType::create(['name' => 'Volumen']); // 3
 
         MeasurementUnit::create([
-            'name' => 'Unit',
+            'name' => 'Unidad',
             'abbreviation' => '',
             'measurement_type_id' => 1,
             'convertion' => NULL,
         ]);
         MeasurementUnit::create([
-            'name' => 'Gram',
+            'name' => 'Gramo',
             'abbreviation' => 'g',
             'measurement_type_id' => 2,
             'convertion' => 1,
         ]);
         MeasurementUnit::create([
-            'name' => 'Kilogram',
+            'name' => 'Kilogramo',
             'abbreviation' => 'kg',
             'measurement_type_id' => 2,
             'convertion' => 1000,
         ]);
         MeasurementUnit::create([
-            'name' => 'Mililiter',
+            'name' => 'Mililitro',
             'abbreviation' => 'mL',
             'measurement_type_id' => 3,
             'convertion' => 1,
         ]);
         MeasurementUnit::create([
-            'name' => 'Liter',
+            'name' => 'Litro',
             'abbreviation' => 'L',
             'measurement_type_id' => 3,
             'convertion' => 1000,

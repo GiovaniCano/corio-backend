@@ -14,6 +14,8 @@ class Day extends Model
         'user_id',
     ];
 
+    protected $with = ['daySections'];
+
     public function user() {
         return $this->belongsTo(User::class);
     }

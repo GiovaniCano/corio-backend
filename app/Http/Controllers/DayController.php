@@ -14,7 +14,7 @@ class DayController extends Controller
      */
     public function index()
     {
-        //
+        return Day::where('user_id', auth()->user()->id)->get();
     }
 
     /**

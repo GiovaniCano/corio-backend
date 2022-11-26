@@ -8,12 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Dish extends Model
 {
-    use HasItems, HasFactory;
+    use HasItems, HasFactory; 
 
     protected $fillable = [
         'name',
         'user_id',
     ];
+
+    protected $with = ['itemables'];
 
     public function user() {
         return $this->belongsTo(User::class);

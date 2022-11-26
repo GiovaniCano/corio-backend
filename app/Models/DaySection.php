@@ -16,6 +16,8 @@ class DaySection extends Model
         'user_id',
     ];
 
+    protected $with = ['dishes', 'itemables'];
+
     public function user() {
         return $this->belongsTo(User::class);
     }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DayController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -14,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+Route::apiResource('day', DayController::class)->middleware(['auth:web']);
 
 Route::delete('user/delete-account', [UserController::class, 'destroy'])->name('user.destroy')->middleware(['auth:web', 'password.confirm']);
 Route::put('user/profile-information', [UserController::class, 'update'])->name('user-profile-information.update')->middleware('auth:web');

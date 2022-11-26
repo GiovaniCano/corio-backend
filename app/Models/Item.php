@@ -15,11 +15,13 @@ class Item extends Model
         'measurement_type_id',
     ];
 
+    protected $with = ['measurementType'];
+
     public function user() {
         return $this->belongsTo(User::class);
     }
     
     public function measurementType() {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(MeasurementType::class);
     }
 }

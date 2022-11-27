@@ -14,7 +14,7 @@ class ItemController extends Controller
      */
     public function index()
     {
-        //
+        return Item::where('user_id', auth()->user()->id)->get();
     }
 
     /**

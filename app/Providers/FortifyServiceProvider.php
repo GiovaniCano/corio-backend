@@ -53,6 +53,7 @@ class FortifyServiceProvider extends ServiceProvider
     public function boot()
     {
         Fortify::authenticateThrough(function(): array {
+            // this is to use custom AttemptToAuthenticate action
             return [
                 config('fortify.limiters.login') ? null : EnsureLoginIsNotThrottled::class,
                 Features::enabled(Features::twoFactorAuthentication()) ? RedirectIfTwoFactorAuthenticatable::class : null,

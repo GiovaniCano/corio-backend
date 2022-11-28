@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class MeasurementUnitController extends Controller
 {
+    function __construct()
+    {
+        $this->authorizeResource(MeasurementUnit::class);
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +19,9 @@ class MeasurementUnitController extends Controller
      */
     public function index()
     {
-        //
+        $public_units = MeasurementUnit::whereIn('id', [1,2,3,4,5])->get();
+        $user_units = MeasurementUnit::where('user_id', auth()->user()->id)->get();
+        return $public_units->merge($user_units);
     }
 
     /**

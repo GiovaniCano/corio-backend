@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class DishController extends Controller
 {
+    function __construct()
+    {
+        $this->authorizeResource(Dish::class);
+    }
+    
     /**
      * Display a listing of the resource.
      *

@@ -18,7 +18,7 @@ class DishPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return true;
     }
 
     /**

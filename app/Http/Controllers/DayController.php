@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class DayController extends Controller
 {
+    function __construct()
+    {
+        $this->authorizeResource(Day::class);
+    }
+    
     /**
      * Display a listing of the resource.
      *

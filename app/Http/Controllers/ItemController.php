@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class ItemController extends Controller
 {
+    function __construct()
+    {
+        $this->authorizeResource(Item::class);
+    }
+    
     /**
      * Display a listing of the resource.
      *

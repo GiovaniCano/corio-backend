@@ -16,7 +16,8 @@ class Itemable extends MorphPivot
         'measurement_unit_id',
     ];
 
-    protected $with = ['measurementUnit', 'item'];
+    // protected $with = ['measurementUnit'];
+    // protected $with = ['trail'];
 
     public function trail() {
         return $this->hasOne(Trail::class, 'itemable_id', 'id');
@@ -26,8 +27,8 @@ class Itemable extends MorphPivot
         return $this->belongsTo(MeasurementUnit::class);
     }
 
-    public function item() {
-        return $this->belongsTo(Item::class);
-    }
+    // public function item() {
+    //     return $this->belongsTo(Item::class);
+    // }
     
 }

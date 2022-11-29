@@ -3,6 +3,7 @@
 use App\Http\Controllers\DayController;
 use App\Http\Controllers\DishController;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\ListtController;
 use App\Http\Controllers\MeasurementUnitController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
@@ -19,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::apiResource('list', ListtController::class)->middleware(['auth:web']);
 Route::apiResource('measurement-unit', MeasurementUnitController::class)->middleware(['auth:web']);
 Route::apiResource('item', ItemController::class)->middleware(['auth:web']);
 Route::apiResource('dish', DishController::class)->middleware(['auth:web']);

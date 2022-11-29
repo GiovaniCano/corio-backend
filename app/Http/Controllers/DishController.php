@@ -19,7 +19,7 @@ class DishController extends Controller
      */
     public function index()
     {
-        return Dish::where('user_id', auth()->user()->id)->get();
+        return Dish::where('user_id', auth()->user()->id)->orderBy('name')->get();
     }
 
     /**

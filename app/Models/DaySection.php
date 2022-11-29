@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class DaySection extends Model
 {
-    use HasItems, HasFactory;
+    use HasFactory, HasItems;
 
     protected $fillable = [
         'name',
@@ -16,7 +16,7 @@ class DaySection extends Model
         'user_id',
     ];
 
-    protected $with = ['dishes', 'itemables'];
+    protected $with = ['dishes', 'items.pivot.measurementUnit'];
 
     public function user() {
         return $this->belongsTo(User::class);
@@ -27,6 +27,6 @@ class DaySection extends Model
     }
     
     public function dishes() {
-        return $this->belongsToMany(Dish::class)->withPivot('id');
+        return $this->belongsToMany(Dish::class)->withPivot('id')->orderBy('name');
     }
 }

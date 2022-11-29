@@ -21,6 +21,6 @@ class Day extends Model
     }
 
     public function daySections() {
-        return $this->hasMany(DaySection::class);
+        return $this->hasMany(DaySection::class)->orderBy('name');
     }
 }

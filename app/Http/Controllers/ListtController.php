@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class ListtController extends Controller
 {
+    function __construct()
+    {
+        $this->authorizeResource(Listt::class);
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +19,7 @@ class ListtController extends Controller
      */
     public function index()
     {
-        //
+        return Listt::where('user_id', auth()->user()->id)->orderBy('name')->get();
     }
 
     /**

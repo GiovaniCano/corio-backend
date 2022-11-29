@@ -18,7 +18,7 @@ class ListtPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return true;
     }
 
     /**

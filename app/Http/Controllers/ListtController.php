@@ -18,8 +18,25 @@ class ListtController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        return Listt::where('user_id', auth()->user()->id)->orderBy('name')->get();
+    {   
+        $lists = Listt::where('user_id', auth()->user()->id)->orderBy('name')->get();
+
+        $lists->each(function (Listt $list) {
+            $items = $list->items;
+
+            $list->setRelation('items', 
+                $items->groupBy('id')
+                    ->sortBy(function($item){
+                        return $item[0]->name;
+                    })
+                    ->values()
+                    ->map(function($item){
+                        return $item->count() > 1 ? $item : $item[0];
+                    })
+            );
+        });
+
+        return $lists;
     }
 
     /**

@@ -41,7 +41,7 @@ class ItemPolicy
      */
     public function create(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -53,7 +53,7 @@ class ItemPolicy
      */
     public function update(User $user, Item $item)
     {
-        //
+        return $user->id === $item->user_id;
     }
 
     /**
@@ -65,7 +65,7 @@ class ItemPolicy
      */
     public function delete(User $user, Item $item)
     {
-        //
+        return $user->id === $item->user_id;
     }
 
     /**

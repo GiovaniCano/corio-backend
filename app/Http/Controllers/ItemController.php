@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SaveItemRequest;
 use App\Models\Item;
 use Illuminate\Http\Request;
 
@@ -25,12 +26,17 @@ class ItemController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  App\Http\Requests\SaveItemRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SaveItemRequest $request)
     {
-        //
+        $validated = $request->validated();
+        $validated['user_id'] = $request->user()->id;
+
+        $item = Item::create($validated);
+
+        return response($item, 201);
     }
 
     /**
@@ -47,13 +53,15 @@ class ItemController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  App\Http\Requests\SaveItemRequest  $request
      * @param  \App\Models\Item  $item
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Item $item)
+    public function update(SaveItemRequest $request, Item $item)
     {
-        //
+        $validated = $request->validated();
+        $item->update($validated);
+        return $item;
     }
 
     /**
@@ -64,6 +72,7 @@ class ItemController extends Controller
      */
     public function destroy(Item $item)
     {
-        //
+        $item->delete();
+        return response(null, 204);
     }
 }

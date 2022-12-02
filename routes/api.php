@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::apiResource('list', ListtController::class)->middleware(['auth:web']);
 Route::apiResource('measurement-unit', MeasurementUnitController::class)->middleware(['auth:web']);
-Route::apiResource('item', ItemController::class)->middleware(['auth:web']);
+Route::apiResource('item', ItemController::class)->except('show')->middleware(['auth:web']);
 Route::apiResource('dish', DishController::class)->middleware(['auth:web']);
 Route::apiResource('day', DayController::class)->middleware(['auth:web']);
 

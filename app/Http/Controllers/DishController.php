@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SaveDishRequest;
 use App\Models\Dish;
 use Illuminate\Http\Request;
 
@@ -25,12 +26,21 @@ class DishController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  App\Http\Requests\SaveDishRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SaveDishRequest $request)
     {
-        //
+        $validated = $request->validated();
+
+        $dish = Dish::create([
+            'name' => $validated['name'],
+            'user_id' => $request->user()->id
+        ]);
+
+        $dish->syncValidatedItems($validated['items']);
+
+        return response(null, 201);
     }
 
     /**
@@ -41,19 +51,25 @@ class DishController extends Controller
      */
     public function show(Dish $dish)
     {
-        //
+        return $dish;
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  App\Http\Requests\SaveDishRequest  $request
      * @param  \App\Models\Dish  $dish
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Dish $dish)
+    public function update(SaveDishRequest $request, Dish $dish)
     {
-        //
+        $validated = $request->validated();
+
+        $dish->update( ['name' => $validated['name']] );
+
+        $dish->syncValidatedItems($validated['items']);
+
+        return response(null, 204);
     }
 
     /**
@@ -64,6 +80,8 @@ class DishController extends Controller
      */
     public function destroy(Dish $dish)
     {
-        //
+        $dish->items()->detach();
+        $dish->delete();
+        return response(null, 204);
     }
 }

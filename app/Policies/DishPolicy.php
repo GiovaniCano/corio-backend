@@ -30,7 +30,7 @@ class DishPolicy
      */
     public function view(User $user, Dish $dish)
     {
-        //
+        return $user->id === $dish->user_id;
     }
 
     /**
@@ -41,7 +41,7 @@ class DishPolicy
      */
     public function create(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -53,7 +53,7 @@ class DishPolicy
      */
     public function update(User $user, Dish $dish)
     {
-        //
+        return $user->id === $dish->user_id;
     }
 
     /**
@@ -65,7 +65,7 @@ class DishPolicy
      */
     public function delete(User $user, Dish $dish)
     {
-        //
+        return $user->id === $dish->user_id;
     }
 
     /**

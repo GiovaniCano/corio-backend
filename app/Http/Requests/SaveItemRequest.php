@@ -24,11 +24,16 @@ class SaveItemRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
-    public function rules()
+    public function rules(): array
     {
-        return [
-            'name' => ['required', 'string', 'max:25', Rule::unique(Item::class)->where('user_id', $this->user()->id)],
+        $rules = [
+            'name' => ['required', 'string', 'max:25'],
             'measurement_type_id' => 'required|integer|exists:'.MeasurementType::class.',id'
         ];
+
+        if($this->isMethod('POST')) $rules['name'][] = Rule::unique(Item::class)->where('user_id', $this->user()->id);
+        if($this->isMethod('PUT')) $rules['name'][] = Rule::unique(Item::class)->where('user_id', $this->user()->id)->ignore($this->item->id);
+
+        return $rules;
     }
 }

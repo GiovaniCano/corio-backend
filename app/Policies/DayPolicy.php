@@ -30,7 +30,7 @@ class DayPolicy
      */
     public function view(User $user, Day $day)
     {
-        //
+        return $user->id === $day->user_id;
     }
 
     /**
@@ -41,7 +41,7 @@ class DayPolicy
      */
     public function create(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -53,7 +53,7 @@ class DayPolicy
      */
     public function update(User $user, Day $day)
     {
-        //
+        return $user->id === $day->user_id;
     }
 
     /**
@@ -65,7 +65,7 @@ class DayPolicy
      */
     public function delete(User $user, Day $day)
     {
-        //
+        return $user->id === $day->user_id;
     }
 
     /**

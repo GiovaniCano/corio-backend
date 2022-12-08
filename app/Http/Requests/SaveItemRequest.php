@@ -27,7 +27,7 @@ class SaveItemRequest extends FormRequest
     public function rules(): array
     {
         $rules = [
-            'name' => ['required', 'string', 'max:25'],
+            'name' => ['required', 'string', 'max:25'], //unique below
             'measurement_type_id' => 'required|integer|exists:'.MeasurementType::class.',id'
         ];
 

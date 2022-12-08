@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\SaveDishRequest;
 use App\Models\Dish;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DishController extends Controller
 {
@@ -80,8 +81,10 @@ class DishController extends Controller
      */
     public function destroy(Dish $dish)
     {
-        $dish->items()->detach();
-        $dish->delete();
+        DB::transaction(function() use ($dish) {
+            $dish->items()->detach();
+            $dish->delete();
+        }, 2);
         return response(null, 204);
     }
 }

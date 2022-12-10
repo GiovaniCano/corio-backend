@@ -27,7 +27,7 @@ class DayController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  App\Http\Requests\SaveDayRequest  $request
+     * @param  \App\Http\Requests\SaveDayRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(SaveDayRequest $request)
@@ -68,7 +68,7 @@ class DayController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  App\Http\Requests\SaveDayRequest  $request
+     * @param  \App\Http\Requests\SaveDayRequest  $request
      * @param  \App\Models\Day  $day
      * @return \Illuminate\Http\Response
      */

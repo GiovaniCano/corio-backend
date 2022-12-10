@@ -30,7 +30,7 @@ class ListtPolicy
      */
     public function view(User $user, Listt $listt)
     {
-        //
+        return $user->id === $listt->user_id;
     }
 
     /**
@@ -41,7 +41,7 @@ class ListtPolicy
      */
     public function create(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -53,7 +53,7 @@ class ListtPolicy
      */
     public function update(User $user, Listt $listt)
     {
-        //
+        return $user->id === $listt->user_id;
     }
 
     /**
@@ -65,7 +65,7 @@ class ListtPolicy
      */
     public function delete(User $user, Listt $listt)
     {
-        //
+        return $user->id === $listt->user_id;
     }
 
     /**

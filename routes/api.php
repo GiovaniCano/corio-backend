@@ -20,11 +20,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::apiResource('list', ListtController::class)->middleware(['auth:web']);
-Route::apiResource('measurement-unit', MeasurementUnitController::class)->middleware(['auth:web']);
-Route::apiResource('item', ItemController::class)->except('show')->middleware(['auth:web']);
-Route::apiResource('dish', DishController::class)->middleware(['auth:web']);
+Route::apiResource('listt', ListtController::class)->middleware(['auth:web']);
 Route::apiResource('day', DayController::class)->middleware(['auth:web']);
+Route::apiResource('dish', DishController::class)->middleware(['auth:web']);
+Route::apiResource('item', ItemController::class)->except('show')->middleware(['auth:web']);
+Route::apiResource('measurement-unit', MeasurementUnitController::class)->middleware(['auth:web']);
 
 Route::delete('user/delete-account', [UserController::class, 'destroy'])->name('user.destroy')->middleware(['auth:web', 'password.confirm']);
 Route::put('user/profile-information', [UserController::class, 'update'])->name('user-profile-information.update')->middleware('auth:web');

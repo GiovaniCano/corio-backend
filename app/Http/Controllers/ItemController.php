@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SaveItemRequest;
 use App\Models\Item;
-use Illuminate\Http\Request;
 
 class ItemController extends Controller
 {
@@ -26,7 +25,7 @@ class ItemController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  App\Http\Requests\SaveItemRequest  $request
+     * @param  \App\Http\Requests\SaveItemRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(SaveItemRequest $request)
@@ -53,7 +52,7 @@ class ItemController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  App\Http\Requests\SaveItemRequest  $request
+     * @param  \App\Http\Requests\SaveItemRequest  $request
      * @param  \App\Models\Item  $item
      * @return \Illuminate\Http\Response
      */

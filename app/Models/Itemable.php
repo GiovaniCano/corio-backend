@@ -25,10 +25,5 @@ class Itemable extends MorphPivot
     
     public function measurementUnit() {
         return $this->belongsTo(MeasurementUnit::class);
-    }
-
-    // public function item() {
-    //     return $this->belongsTo(Item::class);
-    // }
-    
+    }    
 }

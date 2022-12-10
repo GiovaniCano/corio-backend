@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SaveDishRequest;
 use App\Models\Dish;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class DishController extends Controller
@@ -27,7 +26,7 @@ class DishController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  App\Http\Requests\SaveDishRequest  $request
+     * @param  \App\Http\Requests\SaveDishRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(SaveDishRequest $request)
@@ -58,7 +57,7 @@ class DishController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  App\Http\Requests\SaveDishRequest  $request
+     * @param  \App\Http\Requests\SaveDishRequest  $request
      * @param  \App\Models\Dish  $dish
      * @return \Illuminate\Http\Response
      */

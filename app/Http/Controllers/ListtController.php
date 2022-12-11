@@ -3,9 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SaveListRequest;
+use App\Models\Item;
 use App\Models\Itemable;
 use App\Models\Listt;
+use App\Models\MeasurementUnit;
+use App\Rules\CompatibleMeasurementTypes;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
 
 class ListtController extends Controller
 {
@@ -49,7 +54,7 @@ class ListtController extends Controller
     {
         $validated = $request->validated();
 
-        DB::transaction(function() use ($validated) {
+        $list = DB::transaction(function() use ($validated) {
             $list = Listt::create([
                 'name' => $validated['name'],
                 'user_id' => auth()->id()
@@ -65,9 +70,14 @@ class ListtController extends Controller
                 ]);
                 $itemable->trail()->create(['trail' => $item['trail']]);
             }
+
+            return $list;
         });
 
-        return response(null, 201);
+        return response()->json([
+            'id' => $list->id,
+            'name' => $list->name
+        ], 201);
     }
 
     /**
@@ -108,7 +118,10 @@ class ListtController extends Controller
             }
         });
         
-        return response(null, 204);
+        return response()->json([
+            'id' => $listt->id,
+            'name' => $listt->name
+        ]);
     }
 
     /**
@@ -123,6 +136,44 @@ class ListtController extends Controller
             $listt->items()->detach();
             $listt->delete();
         });
+        return response(null, 204);
+    }
+
+    public function indexLite() {
+        return Listt::without('items')
+                    ->where('user_id', auth()->user()->id)
+                    ->orderBy('name')
+                    ->get(['id', 'name']);
+    }
+
+    public function addItemToList(Request $request, Listt $listt) 
+    {
+        $this->authorize('update', $listt);
+
+        $validated = $request->validate([
+            'items' => 'required|array|max:2500',
+            'items.*' => ['required_array_keys:item_id,quantity,measurement_unit_id,trail', new CompatibleMeasurementTypes],
+            'items.*.item_id' => ['integer', Rule::exists(Item::class, 'id')->where('user_id', auth()->id())],
+            'items.*.quantity' => 'numeric|max:999999.99|min:0', // DECIMAL(8,2)
+            'items.*.measurement_unit_id' => ['integer', Rule::exists(MeasurementUnit::class, 'id')->where(function($q) {
+                return $q->whereIn('id', [1,2,3,4,5])->orWhere('user_id', auth()->id());
+            })],
+            'items.*.trail' => 'string|max:255'
+        ]);
+
+        DB::transaction(function() use($validated, $listt) {
+            foreach ($validated['items'] as $item) {
+                $itemable = Itemable::create([
+                    'itemable_type' => $listt::class,
+                    'itemable_id' => $listt->id,
+                    'item_id' => $item['item_id'],
+                    'quantity' => $item['quantity'],
+                    'measurement_unit_id' => $item['measurement_unit_id'],
+                ]);
+                $itemable->trail()->create(['trail' => $item['trail']]);            
+            }
+        });
+
         return response(null, 204);
     }
 }

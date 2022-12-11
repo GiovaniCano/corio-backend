@@ -20,7 +20,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('listt-lite', [ListtController::class, 'indexLite'])->middleware(['auth:web'])->name('listt.index-lite');
+Route::post('listt/{listt}/add-item', [ListtController::class, 'addItemToList'])->middleware(['auth:web'])->name('listt.add-item');
 Route::apiResource('listt', ListtController::class)->middleware(['auth:web']);
+
 Route::apiResource('day', DayController::class)->middleware(['auth:web']);
 Route::apiResource('dish', DishController::class)->middleware(['auth:web']);
 Route::apiResource('item', ItemController::class)->except('show')->middleware(['auth:web']);

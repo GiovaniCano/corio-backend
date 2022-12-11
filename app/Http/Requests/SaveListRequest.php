@@ -31,7 +31,7 @@ class SaveListRequest extends FormRequest
         $rules = [
             'name' => ['required', 'string', 'max:25'], //unique below
 
-            'items' => 'present|array|max:500',
+            'items' => 'present|array|max:2500',
             'items.*' => ['required_array_keys:item_id,quantity,measurement_unit_id,trail', new CompatibleMeasurementTypes],
             'items.*.item_id' => ['integer', Rule::exists(Item::class, 'id')->where('user_id', $this->user()->id)],
             'items.*.quantity' => 'numeric|max:999999.99|min:0', // DECIMAL(8,2)

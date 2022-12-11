@@ -59,7 +59,7 @@ class ItemController extends Controller
     public function update(SaveItemRequest $request, Item $item)
     {
         $validated = $request->validated();
-        $item->update($validated);
+        $item->update(['name' => $validated['name']]);
         return $item;
     }
 

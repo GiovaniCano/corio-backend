@@ -22,11 +22,11 @@ class DevelopSeeder extends Seeder
      */
     public function run()
     {
-        User::factory(2)
+        User::factory(1)
             ->has(Day::factory(3)->has(DaySection::factory(4)))
             ->has(Dish::factory(10))
             ->has(Listt::factory(4), 'lists')
-            ->has(MeasurementUnit::factory(2))
+            // ->has(MeasurementUnit::factory(2))
             ->has(Item::factory(30))
             ->create();
 

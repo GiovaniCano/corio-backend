@@ -49,12 +49,12 @@ INSERT INTO avatars (name) VALUES ('water-glass.png');
 INSERT INTO avatars (name) VALUES ('watermelon.png');
 INSERT INTO avatars (name) VALUES ('wine.png');
 
-INSERT INTO measurement_types (name) VALUES ('unit');
-INSERT INTO measurement_types (name) VALUES ('weight');
-INSERT INTO measurement_types (name) VALUES ('volume');
+INSERT INTO measurement_types (name) VALUES ('Weight');
+INSERT INTO measurement_types (name) VALUES ('Volume');
+INSERT INTO measurement_types (name) VALUES ('Unit');
 
-INSERT INTO measurement_units (name, abbreviation, measurement_type_id, convertion, created_at, updated_at) VALUES ('Unit', '', 1, NULL, NOW(), NOW());
-INSERT INTO measurement_units (name, abbreviation, measurement_type_id, convertion, created_at, updated_at) VALUES ('Gram', 'g', 2, 1, NOW(), NOW());
-INSERT INTO measurement_units (name, abbreviation, measurement_type_id, convertion, created_at, updated_at) VALUES ('Kilogram', 'kg', 2, 1000, NOW(), NOW());
-INSERT INTO measurement_units (name, abbreviation, measurement_type_id, convertion, created_at, updated_at) VALUES ('Mililiter', 'mL', 3, 1, NOW(), NOW());
-INSERT INTO measurement_units (name, abbreviation, measurement_type_id, convertion, created_at, updated_at) VALUES ('Liter', 'L', 3, 1000, NOW(), NOW());
+INSERT INTO measurement_units (name, abbreviation, measurement_type_id, convertion, created_at, updated_at) VALUES ('Gram', 'g', 1, 1, NOW(), NOW());
+INSERT INTO measurement_units (name, abbreviation, measurement_type_id, convertion, created_at, updated_at) VALUES ('Kilogram', 'kg', 1, 1000, NOW(), NOW());
+INSERT INTO measurement_units (name, abbreviation, measurement_type_id, convertion, created_at, updated_at) VALUES ('Mililiter', 'mL', 2, 1, NOW(), NOW());
+INSERT INTO measurement_units (name, abbreviation, measurement_type_id, convertion, created_at, updated_at) VALUES ('Liter', 'L', 2, 1000, NOW(), NOW());
+INSERT INTO measurement_units (name, abbreviation, measurement_type_id, convertion, created_at, updated_at) VALUES ('Unit', '', 3, NULL, NOW(), NOW());

@@ -74,39 +74,39 @@ class RequiredSeeder extends Seeder
             Avatar::create(['name' => $avatar]);
         }
 
-        MeasurementType::create(['name' => 'Unidad']); // 1
-        MeasurementType::create(['name' => 'Peso']); // 2
-        MeasurementType::create(['name' => 'Volumen']); // 3
+        MeasurementType::create(['name' => 'Peso']); // 1
+        MeasurementType::create(['name' => 'Volumen']); // 2
+        MeasurementType::create(['name' => 'Unidad']); // 3
 
-        MeasurementUnit::create([
-            'name' => 'Unidad',
-            'abbreviation' => '',
-            'measurement_type_id' => 1,
-            'convertion' => NULL,
-        ]);
         MeasurementUnit::create([
             'name' => 'Gramo',
             'abbreviation' => 'g',
-            'measurement_type_id' => 2,
+            'measurement_type_id' => 1,
             'convertion' => 1,
         ]);
         MeasurementUnit::create([
             'name' => 'Kilogramo',
             'abbreviation' => 'kg',
-            'measurement_type_id' => 2,
+            'measurement_type_id' => 1,
             'convertion' => 1000,
         ]);
         MeasurementUnit::create([
             'name' => 'Mililitro',
             'abbreviation' => 'mL',
-            'measurement_type_id' => 3,
+            'measurement_type_id' => 2,
             'convertion' => 1,
         ]);
         MeasurementUnit::create([
             'name' => 'Litro',
             'abbreviation' => 'L',
-            'measurement_type_id' => 3,
+            'measurement_type_id' => 2,
             'convertion' => 1000,
+        ]);
+        MeasurementUnit::create([
+            'name' => 'Unidad',
+            'abbreviation' => '',
+            'measurement_type_id' => 3,
+            'convertion' => NULL,
         ]);
     }
 }

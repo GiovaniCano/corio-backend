@@ -1,4 +1,6 @@
 /node_modules
+/public/vendor
+/public/assets
 /public/build
 /public/hot
 /public/storage
